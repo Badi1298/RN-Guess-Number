@@ -1,4 +1,6 @@
-import { TextInput, View } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
+
+import PrimaryButton from '../components/PrimaryButton';
 
 type Props = {};
 
@@ -6,7 +8,12 @@ export default function StartGameScreen({}: Props) {
 	return (
 		<View>
 			<TextInput />
-			{/* CUSTOM BUTTONS HERE */}
+			<View>
+				<PrimaryButton>Reset</PrimaryButton>
+				<PrimaryButton>Confirm</PrimaryButton>
+			</View>
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({});
