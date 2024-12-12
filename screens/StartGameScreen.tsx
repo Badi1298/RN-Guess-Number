@@ -7,7 +7,13 @@ type Props = {};
 export default function StartGameScreen({}: Props) {
 	return (
 		<View style={styles.inputContainer}>
-			<TextInput />
+			<TextInput
+				maxLength={2}
+				autoCorrect={false}
+				autoCapitalize="none"
+				keyboardType="number-pad"
+				style={styles.numberInput}
+			/>
 			<View>
 				<PrimaryButton>Reset</PrimaryButton>
 				<PrimaryButton>Confirm</PrimaryButton>
@@ -31,5 +37,17 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.23,
 		shadowRadius: 2.62,
 		elevation: 4,
+	},
+
+	numberInput: {
+		height: 50,
+		width: 50,
+		fontSize: 24,
+		borderBottomWidth: 2,
+		borderBottomColor: '#ddb52f',
+		color: '#ddb52f',
+		marginVertical: 8,
+		fontWeight: 'bold',
+		textAlign: 'center',
 	},
 });
