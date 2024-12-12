@@ -1,14 +1,15 @@
 import { ReactNode } from 'react';
-import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 
 type Props = {
 	children: ReactNode;
+	style?: StyleProp<ViewStyle>;
 	onPress?: () => void;
 };
 
-export default function PrimaryButton({ children, onPress }: Props) {
+export default function BaseButton({ children, onPress, style }: Props) {
 	return (
-		<View style={styles.buttonOuterContainer}>
+		<View style={[styles.buttonOuterContainer, style]}>
 			<Pressable
 				onPress={onPress}
 				android_ripple={{ color: '#640233' }}

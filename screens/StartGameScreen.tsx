@@ -1,10 +1,14 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 
-import PrimaryButton from '../components/PrimaryButton';
+import BaseButton from '../components/BaseButton';
 
 type Props = {};
 
 export default function StartGameScreen({}: Props) {
+	const confirmHandler = () => {
+		console.log('confirm');
+	};
+
 	const resetFieldHandler = () => {
 		console.log('resetField');
 	};
@@ -18,9 +22,19 @@ export default function StartGameScreen({}: Props) {
 				keyboardType="number-pad"
 				style={styles.numberInput}
 			/>
-			<View>
-				<PrimaryButton onPress={resetFieldHandler}>Reset</PrimaryButton>
-				<PrimaryButton>Confirm</PrimaryButton>
+			<View style={styles.buttonsContainer}>
+				<BaseButton
+					style={{ flex: 1 }}
+					onPress={resetFieldHandler}
+				>
+					Reset
+				</BaseButton>
+				<BaseButton
+					style={{ flex: 1 }}
+					onPress={confirmHandler}
+				>
+					Confirm
+				</BaseButton>
 			</View>
 		</View>
 	);
@@ -29,6 +43,7 @@ export default function StartGameScreen({}: Props) {
 const styles = StyleSheet.create({
 	inputContainer: {
 		alignItems: 'center',
+		rowGap: 16,
 		padding: 16,
 		marginTop: 100,
 		marginHorizontal: 24,
@@ -54,5 +69,9 @@ const styles = StyleSheet.create({
 		marginVertical: 8,
 		fontWeight: 'bold',
 		textAlign: 'center',
+	},
+
+	buttonsContainer: {
+		flexDirection: 'row',
 	},
 });
