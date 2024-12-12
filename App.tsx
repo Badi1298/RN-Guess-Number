@@ -4,10 +4,8 @@ import StartGameScreen from './screens/StartGameScreen';
 
 export default function App() {
 	return (
-		<View>
-			<StartGameScreen />
-			<StatusBar style="auto" />
-		</View>
+		<StartGameScreen />
+		// <StatusBar style="auto" />
 	);
 }
 
