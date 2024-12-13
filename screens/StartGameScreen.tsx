@@ -1,10 +1,17 @@
-import { StyleSheet, TextInput, View } from 'react-native';
+import { useState } from 'react';
+import { NativeSyntheticEvent, StyleSheet, TextInput, TextInputChangeEventData, View } from 'react-native';
 
 import BaseButton from '../components/BaseButton';
 
 type Props = {};
 
 export default function StartGameScreen({}: Props) {
+	const [number, setNumber] = useState('');
+
+	const numberInputHandler = (text: string): void => {
+		setNumber(text);
+	};
+
 	const confirmHandler = () => {
 		console.log('confirm');
 	};
@@ -16,11 +23,13 @@ export default function StartGameScreen({}: Props) {
 	return (
 		<View style={styles.inputContainer}>
 			<TextInput
+				value={number}
 				maxLength={2}
 				autoCorrect={false}
 				autoCapitalize="none"
 				keyboardType="number-pad"
 				style={styles.numberInput}
+				onChangeText={numberInputHandler}
 			/>
 			<View style={styles.buttonsContainer}>
 				<BaseButton
