@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NativeSyntheticEvent, StyleSheet, TextInput, TextInputChangeEventData, View } from 'react-native';
+import { StyleSheet, TextInput, View, Alert } from 'react-native';
 
 import BaseButton from '../components/BaseButton';
 
@@ -12,12 +12,20 @@ export default function StartGameScreen({}: Props) {
 		setNumber(text);
 	};
 
-	const confirmHandler = () => {
-		console.log('confirm');
+	const resetInputHandler = () => {
+		setNumber('');
 	};
 
-	const resetFieldHandler = () => {
-		console.log('resetField');
+	const confirmHandler = () => {
+		const chosenNumber = parseInt(number);
+
+		if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+			// show alert
+			Alert.alert('Invalid number', 'Number has to be a number between 1 and 99', [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]);
+			return;
+		}
+
+		console.log('Valid number!');
 	};
 
 	return (
@@ -34,7 +42,7 @@ export default function StartGameScreen({}: Props) {
 			<View style={styles.buttonsContainer}>
 				<BaseButton
 					style={{ flex: 1 }}
-					onPress={resetFieldHandler}
+					onPress={resetInputHandler}
 				>
 					Reset
 				</BaseButton>
