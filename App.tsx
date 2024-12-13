@@ -1,12 +1,11 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createStaticNavigation, DefaultTheme, StaticParamList } from '@react-navigation/native';
+import { createStaticNavigation, StaticParamList } from '@react-navigation/native';
 
 import { StatusBar } from 'expo-status-bar';
 
 import GameScreen from './screens/GameScreen';
 import StartGameScreen from './screens/StartGameScreen';
-import { LinearGradient } from 'expo-linear-gradient';
 import BackgroundOverlay from './components/BackgroundOverlay';
 
 const RootStack = createNativeStackNavigator({

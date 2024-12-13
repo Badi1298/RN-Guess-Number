@@ -1,11 +1,9 @@
 import { useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, TextInput, View, Alert, ImageBackground } from 'react-native';
+import { StyleSheet, TextInput, View, Alert } from 'react-native';
 
 import BaseButton from '../components/BaseButton';
-import { LinearGradient } from 'expo-linear-gradient';
-import BackgroundOverlay from '../components/BackgroundOverlay';
 
 type Props = {};
 
