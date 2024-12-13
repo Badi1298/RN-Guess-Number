@@ -1,35 +1,46 @@
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStaticNavigation, DefaultTheme, StaticParamList } from '@react-navigation/native';
+
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet } from 'react-native';
 
-import { LinearGradient } from 'expo-linear-gradient';
-
+import GameScreen from './screens/GameScreen';
 import StartGameScreen from './screens/StartGameScreen';
+import { LinearGradient } from 'expo-linear-gradient';
+import BackgroundOverlay from './components/BackgroundOverlay';
+
+const RootStack = createNativeStackNavigator({
+	screens: {
+		StartGame: {
+			screen: StartGameScreen,
+			options: {
+				title: 'Dice Game',
+			},
+		},
+		Game: GameScreen,
+	},
+	screenOptions: {
+		animation: 'slide_from_right',
+		headerTransparent: true,
+		contentStyle: { backgroundColor: 'transparent' },
+	},
+});
+
+type RootStackParamList = StaticParamList<typeof RootStack>;
+
+declare global {
+	namespace ReactNavigation {
+		interface RootParamList extends RootStackParamList {}
+	}
+}
+
+const Navigation = createStaticNavigation(RootStack);
 
 export default function App() {
 	return (
-		<LinearGradient
-			style={styles.rootScreen}
-			colors={['#4e0329', '#ddb52f']}
-		>
-			<ImageBackground
-				resizeMode="cover"
-				style={styles.rootScreen}
-				imageStyle={styles.backgroundImage}
-				source={require('./assets/images/background.png')}
-			>
-				<StartGameScreen />
-			</ImageBackground>
-			<StatusBar style="light" />
-		</LinearGradient>
+		<BackgroundOverlay>
+			<Navigation />
+			<StatusBar style="auto" />
+		</BackgroundOverlay>
 	);
 }
-
-const styles = StyleSheet.create({
-	rootScreen: {
-		flex: 1,
-	},
-
-	backgroundImage: {
-		opacity: 0.2,
-	},
-});

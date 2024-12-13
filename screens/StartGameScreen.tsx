@@ -1,11 +1,17 @@
 import { useState } from 'react';
-import { StyleSheet, TextInput, View, Alert } from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, TextInput, View, Alert, ImageBackground } from 'react-native';
 
 import BaseButton from '../components/BaseButton';
+import { LinearGradient } from 'expo-linear-gradient';
+import BackgroundOverlay from '../components/BackgroundOverlay';
 
 type Props = {};
 
 export default function StartGameScreen({}: Props) {
+	const navigation = useNavigation();
+
 	const [number, setNumber] = useState('');
 
 	const numberInputHandler = (text: string): void => {
@@ -25,7 +31,7 @@ export default function StartGameScreen({}: Props) {
 			return;
 		}
 
-		console.log('Valid number!');
+		navigation.navigate('Game');
 	};
 
 	return (
