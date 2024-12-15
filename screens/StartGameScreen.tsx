@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, TextInput, View, Alert } from 'react-native';
 
+import Colors from '../constants/colors';
+
 import BaseButton from '../components/BaseButton';
 
 type Props = {};
@@ -66,9 +68,9 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		rowGap: 16,
 		padding: 16,
-		marginTop: 100,
+		marginTop: 70,
 		marginHorizontal: 24,
-		backgroundColor: '#3b021f',
+		backgroundColor: Colors.primary800,
 		borderRadius: 8,
 		shadowColor: '#000',
 		shadowOffset: {
@@ -85,8 +87,8 @@ const styles = StyleSheet.create({
 		width: 50,
 		fontSize: 24,
 		borderBottomWidth: 2,
-		borderBottomColor: '#ddb52f',
-		color: '#ddb52f',
+		borderBottomColor: Colors.accent500,
+		color: Colors.accent500,
 		marginVertical: 8,
 		fontWeight: 'bold',
 		textAlign: 'center',

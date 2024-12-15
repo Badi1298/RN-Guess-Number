@@ -1,8 +1,10 @@
-import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStaticNavigation, StaticParamList } from '@react-navigation/native';
 
 import { StatusBar } from 'expo-status-bar';
+
+import Colors from './constants/colors';
 
 import GameScreen from './screens/GameScreen';
 import StartGameScreen from './screens/StartGameScreen';
@@ -22,6 +24,9 @@ const RootStack = createNativeStackNavigator({
 		animation: 'slide_from_right',
 		headerTransparent: true,
 		contentStyle: { backgroundColor: 'transparent' },
+		headerTitleStyle: {
+			color: Colors.accent500,
+		},
 	},
 });
 
@@ -38,7 +43,9 @@ const Navigation = createStaticNavigation(RootStack);
 export default function App() {
 	return (
 		<BackgroundOverlay>
-			<Navigation />
+			<SafeAreaView style={{ flex: 1 }}>
+				<Navigation />
+			</SafeAreaView>
 			<StatusBar style="auto" />
 		</BackgroundOverlay>
 	);

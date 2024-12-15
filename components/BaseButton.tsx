@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import { Platform, Pressable, StyleProp, StyleSheet, Text, View, ViewStyle } from 'react-native';
 
+import Colors from '../constants/colors';
+
 type Props = {
 	children: ReactNode;
 	style?: StyleProp<ViewStyle>;
@@ -12,7 +14,7 @@ export default function BaseButton({ children, onPress, style }: Props) {
 		<View style={[styles.buttonOuterContainer, style]}>
 			<Pressable
 				onPress={onPress}
-				android_ripple={{ color: '#640233' }}
+				android_ripple={{ color: Colors.primary600 }}
 				style={({ pressed }) => [styles.buttonInnerContainer, pressed && Platform.OS === 'ios' && styles.pressed]}
 			>
 				<Text style={styles.buttonText}>{children}</Text>
@@ -29,10 +31,10 @@ const styles = StyleSheet.create({
 	},
 
 	buttonInnerContainer: {
-		backgroundColor: '#72063c',
+		elevation: 2,
 		paddingVertical: 8,
 		paddingHorizontal: 16,
-		elevation: 2,
+		backgroundColor: Colors.primary500,
 	},
 
 	buttonText: {

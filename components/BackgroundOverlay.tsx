@@ -1,6 +1,9 @@
-import { LinearGradient } from 'expo-linear-gradient';
 import { ReactNode } from 'react';
 import { ImageBackground, StyleSheet } from 'react-native';
+
+import { LinearGradient } from 'expo-linear-gradient';
+
+import Colors from '../constants/colors';
 
 type Props = {
 	children: ReactNode;
@@ -10,7 +13,7 @@ export default function BackgroundOverlay({ children }: Props) {
 	return (
 		<LinearGradient
 			style={styles.rootScreen}
-			colors={['#4e0329', '#ddb52f']}
+			colors={[Colors.primary700, Colors.accent500]}
 		>
 			<ImageBackground
 				resizeMode="cover"
