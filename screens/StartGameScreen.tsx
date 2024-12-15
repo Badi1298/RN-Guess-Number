@@ -1,17 +1,16 @@
 import { useState } from 'react';
-
-import { useNavigation } from '@react-navigation/native';
 import { StyleSheet, TextInput, View, Alert } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import Colors from '../constants/colors';
 
-import BaseButton from '../components/BaseButton';
+import { RootStackParamList } from '../App';
 
-type Props = {};
+import BaseButton from '../components/ui/BaseButton';
 
-export default function StartGameScreen({}: Props) {
-	const navigation = useNavigation();
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
+export default function StartGameScreen({ navigation }: Props) {
 	const [number, setNumber] = useState('');
 
 	const numberInputHandler = (text: string): void => {
@@ -26,12 +25,11 @@ export default function StartGameScreen({}: Props) {
 		const chosenNumber = parseInt(number);
 
 		if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
-			// show alert
 			Alert.alert('Invalid number', 'Number has to be a number between 1 and 99', [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]);
 			return;
 		}
 
-		navigation.navigate('Game');
+		navigation.navigate('Game', { currentNumber: parseInt(number) });
 	};
 
 	return (
