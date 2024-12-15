@@ -38,19 +38,22 @@ export default function GameScreen({ route, navigation }: Props) {
 	}, [currentGuess, currentNumber]);
 
 	function nextGuessHandler(operant: '+' | '-'): void {
-		if ((operant === '-' && currentGuess < currentNumber) || (operant === '+' && currentGuess > currentNumber)) {
+		const isLie = (operant === '-' && currentGuess < currentNumber) || (operant === '+' && currentGuess > currentNumber);
+
+		if (isLie) {
 			Alert.alert("Don't lie", 'You know that this is wrong...', [{ text: 'Sorry!', style: 'cancel' }]);
 			return;
 		}
 
+		// Update bounds based on the operator
 		if (operant === '-') {
 			max = currentGuess;
 		} else {
 			min = currentGuess + 1;
 		}
 
+		// Generate and set the new random number
 		const newRandomNumber = generateRandomBetween(min, max, currentGuess);
-
 		setCurrentGuess(newRandomNumber);
 	}
 
