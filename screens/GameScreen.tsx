@@ -18,16 +18,24 @@ function generateRandomBetween(min: number, max: number, exclude: number): numbe
 	}
 }
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Game'>;
-
 let min = 1;
 let max = 100;
+
+type Props = NativeStackScreenProps<RootStackParamList, 'Game'>;
 
 export default function GameScreen({ route, navigation }: Props) {
 	const { currentNumber } = route.params;
 
-	const initialGuess = generateRandomBetween(min, max, currentNumber);
+	const initialGuess = generateRandomBetween(1, 100, currentNumber);
 	const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+	useEffect(() => {
+		if (currentNumber === currentNumber) {
+			Alert.alert('Yay', `You did it you son of a gun! The number was ${currentNumber}.`, [{ text: 'Yuppi!', style: 'default' }]);
+			navigation.replace('GameOver');
+			return;
+		}
+	}, [currentGuess, currentNumber]);
 
 	function nextGuessHandler(operant: '+' | '-'): void {
 		if ((operant === '-' && currentGuess < currentNumber) || (operant === '+' && currentGuess > currentNumber)) {
@@ -42,12 +50,6 @@ export default function GameScreen({ route, navigation }: Props) {
 		}
 
 		const newRandomNumber = generateRandomBetween(min, max, currentGuess);
-
-		if (currentNumber === newRandomNumber) {
-			Alert.alert('Yay', `You did it you son of a gun! The number was ${currentNumber}.`, [{ text: 'Yuppi!', style: 'default' }]);
-			navigation.navigate('Home');
-			return;
-		}
 
 		setCurrentGuess(newRandomNumber);
 	}
