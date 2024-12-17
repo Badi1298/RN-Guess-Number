@@ -7,6 +7,8 @@ import { RootStackParamList } from '../App';
 import Title from '../components/ui/Title';
 import BaseButton from '../components/ui/BaseButton';
 import NumberContainer from '../components/game/NumberContainer';
+import Card from '../components/ui/Card';
+import Colors from '../constants/colors';
 
 function generateRandomBetween(min: number, max: number, exclude: number): number {
 	const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -30,7 +32,7 @@ export default function GameScreen({ route, navigation }: Props) {
 	const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
 	useEffect(() => {
-		if (currentNumber === currentNumber) {
+		if (currentGuess === currentNumber) {
 			Alert.alert('Yay', `You did it you son of a gun! The number was ${currentNumber}.`, [{ text: 'Yuppi!', style: 'default' }]);
 			navigation.replace('GameOver');
 			return;
@@ -61,13 +63,23 @@ export default function GameScreen({ route, navigation }: Props) {
 		<View style={styles.screen}>
 			<Title>Oppeonent's Guess</Title>
 			<NumberContainer>{currentGuess}</NumberContainer>
-			<View>
-				<Text>Higher or lower?</Text>
-				<View>
-					<BaseButton onPress={() => nextGuessHandler('+')}>+</BaseButton>
-					<BaseButton onPress={() => nextGuessHandler('-')}>-</BaseButton>
+			<Card>
+				<Text style={styles.instructionText}>Higher or lower?</Text>
+				<View style={{ flexDirection: 'row' }}>
+					<BaseButton
+						style={{ flex: 1 }}
+						onPress={() => nextGuessHandler('+')}
+					>
+						-
+					</BaseButton>
+					<BaseButton
+						style={{ flex: 1 }}
+						onPress={() => nextGuessHandler('-')}
+					>
+						+
+					</BaseButton>
 				</View>
-			</View>
+			</Card>
 			<View></View>
 		</View>
 	);
@@ -77,6 +89,12 @@ const styles = StyleSheet.create({
 	screen: {
 		flex: 1,
 		padding: 24,
-		marginTop: 58,
+	},
+
+	instructionText: {
+		color: Colors.accent500,
+		fontSize: 20,
+		fontWeight: '500',
+		marginBottom: 12,
 	},
 });

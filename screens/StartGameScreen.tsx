@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, TextInput, View, Alert } from 'react-native';
+import { StyleSheet, TextInput, View, Alert, Text } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import Colors from '../constants/colors';
@@ -7,6 +7,7 @@ import Colors from '../constants/colors';
 import { RootStackParamList } from '../App';
 
 import BaseButton from '../components/ui/BaseButton';
+import Card from '../components/ui/Card';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -33,7 +34,8 @@ export default function StartGameScreen({ navigation }: Props) {
 	};
 
 	return (
-		<View style={styles.inputContainer}>
+		<Card style={{ marginTop: 70 }}>
+			<Text style={styles.instructionText}>Enter a number</Text>
 			<TextInput
 				value={number}
 				maxLength={2}
@@ -57,27 +59,15 @@ export default function StartGameScreen({ navigation }: Props) {
 					Confirm
 				</BaseButton>
 			</View>
-		</View>
+		</Card>
 	);
 }
 
 const styles = StyleSheet.create({
-	inputContainer: {
-		alignItems: 'center',
-		rowGap: 16,
-		padding: 16,
-		marginTop: 70,
-		marginHorizontal: 24,
-		backgroundColor: Colors.primary800,
-		borderRadius: 8,
-		shadowColor: '#000',
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.23,
-		shadowRadius: 2.62,
-		elevation: 4,
+	instructionText: {
+		color: Colors.accent500,
+		fontSize: 20,
+		fontWeight: '500',
 	},
 
 	numberInput: {
