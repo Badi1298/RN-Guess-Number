@@ -1,15 +1,18 @@
-import { useState } from 'react';
-
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { StatusBar } from 'expo-status-bar';
 
+import { useFonts } from 'expo-font';
+
+import * as SplashScreen from 'expo-splash-screen';
+
 import GameScreen from './screens/GameScreen';
 import GameOverScreen from './screens/GameOverScreen';
 import StartGameScreen from './screens/StartGameScreen';
 import BackgroundOverlay from './components/BackgroundOverlay';
+import { useEffect } from 'react';
 
 export type RootStackParamList = {
 	Home: undefined;
@@ -19,7 +22,24 @@ export type RootStackParamList = {
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
+SplashScreen.preventAutoHideAsync()
+	.then((result) => console.log(`SplashScreen.preventAutoHideAsync() succeeded: ${result}`))
+	.catch(console.warn); // it's good to explicitly catch and inspect any error
+
 export default function App() {
+	const [fontsLoaded] = useFonts({
+		'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+		'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+	});
+
+	if (fontsLoaded) {
+		hideSplashScreen();
+	}
+
+	async function hideSplashScreen() {
+		await SplashScreen.hideAsync();
+	}
+
 	return (
 		<BackgroundOverlay>
 			<SafeAreaView style={{ flex: 1 }}>

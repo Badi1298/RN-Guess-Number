@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
 	instructionText: {
 		color: Colors.accent500,
 		fontSize: 20,
-		fontWeight: '500',
+		fontFamily: 'open-sans',
 		marginBottom: 12,
 	},
 });

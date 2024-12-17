@@ -66,8 +66,8 @@ export default function StartGameScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
 	instructionText: {
 		color: Colors.accent500,
+		fontFamily: 'open-sans',
 		fontSize: 20,
-		fontWeight: '500',
 	},
 
 	numberInput: {
