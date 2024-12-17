@@ -4,11 +4,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { RootStackParamList } from '../App';
 
+import Colors from '../constants/colors';
+
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+import Card from '../components/ui/Card';
 import Title from '../components/ui/Title';
 import BaseButton from '../components/ui/BaseButton';
 import NumberContainer from '../components/game/NumberContainer';
-import Card from '../components/ui/Card';
-import Colors from '../constants/colors';
 
 function generateRandomBetween(min: number, max: number, exclude: number): number {
 	const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -70,13 +73,19 @@ export default function GameScreen({ route, navigation }: Props) {
 						style={{ flex: 1 }}
 						onPress={() => nextGuessHandler('+')}
 					>
-						-
+						<Ionicons
+							name="remove"
+							size={16}
+						/>
 					</BaseButton>
 					<BaseButton
 						style={{ flex: 1 }}
 						onPress={() => nextGuessHandler('-')}
 					>
-						+
+						<Ionicons
+							name="add"
+							size={16}
+						/>
 					</BaseButton>
 				</View>
 			</Card>
