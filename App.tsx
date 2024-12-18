@@ -54,7 +54,11 @@ export default function App() {
 						<RootStack.Screen
 							name="Home"
 							component={StartGameScreen}
-							options={{ title: 'Guess My Number', headerTitleStyle: { fontSize: 24, color: 'white' }, headerTitleAlign: 'center' }}
+							options={{
+								title: 'Guess My Number',
+								headerTitleStyle: { fontSize: 24, color: 'white' },
+								headerTitleAlign: 'center',
+							}}
 						/>
 						<RootStack.Screen
 							name="Game"

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
+
+import { CommonActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { RootStackParamList } from '../App';
@@ -26,7 +28,7 @@ export default function GameOverScreen({ route, navigation }: Props) {
 			</Text>
 			<BaseButton
 				style={{ marginTop: 40 }}
-				onPress={() => navigation.replace('Home')}
+				onPress={() => navigation.dispatch(CommonActions.reset({ index: 0, routes: [{ name: 'Home' }] }))}
 			>
 				<Text style={{ fontSize: 20, fontFamily: 'open-sans' }}>Start New Game</Text>
 			</BaseButton>
