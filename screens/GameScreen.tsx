@@ -41,6 +41,11 @@ export default function GameScreen({ route, navigation }: Props) {
 		navigation.replace('GameOver', { currentNumber, rounds });
 	}, [currentGuess, currentNumber]);
 
+	useEffect(() => {
+		min = 1;
+		max = 100;
+	}, []);
+
 	function nextGuessHandler(operant: '+' | '-'): void {
 		const isLie = (operant === '-' && currentGuess < currentNumber) || (operant === '+' && currentGuess > currentNumber);
 

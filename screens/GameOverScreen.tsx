@@ -4,26 +4,32 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { RootStackParamList } from '../App';
 
-import Card from '../components/ui/Card';
 import Colors from '../constants/colors';
+import BaseButton from '../components/ui/BaseButton';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'GameOver'>;
 
-export default function GameOverScreen({ route }: Props) {
+export default function GameOverScreen({ route, navigation }: Props) {
 	const { currentNumber, rounds } = route.params;
 
 	return (
-		<View style={{ marginTop: 70, alignItems: 'center' }}>
+		<View style={{ marginTop: 46, padding: 24, alignItems: 'center' }}>
 			<View style={styles.inputContainer}>
 				<Image
 					style={{ width: '100%', height: '100%' }}
 					source={require('../assets/images/success.png')}
 				/>
 			</View>
-			<Card>
-				<Text style={styles.text}>Number was: {currentNumber}</Text>
-				<Text style={styles.text}>Number of rounds: {rounds}</Text>
-			</Card>
+			<Text style={styles.text}>
+				Your phone needed <Text style={styles.emphasisText}>{rounds}</Text> rounds to guess the number
+				<Text style={styles.emphasisText}> {currentNumber}</Text>.
+			</Text>
+			<BaseButton
+				style={{ marginTop: 40 }}
+				onPress={() => navigation.replace('Home')}
+			>
+				<Text style={{ fontSize: 20, fontFamily: 'open-sans' }}>Start New Game</Text>
+			</BaseButton>
 		</View>
 	);
 }
@@ -40,8 +46,13 @@ const styles = StyleSheet.create({
 	},
 
 	text: {
-		color: 'white',
-		fontSize: 20,
+		fontSize: 24,
+		fontFamily: 'open-sans',
+		textAlign: 'center',
+	},
+
+	emphasisText: {
+		color: Colors.primary500,
 		fontFamily: 'open-sans-bold',
 	},
 });
