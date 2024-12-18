@@ -12,18 +12,17 @@ import GameScreen from './screens/GameScreen';
 import GameOverScreen from './screens/GameOverScreen';
 import StartGameScreen from './screens/StartGameScreen';
 import BackgroundOverlay from './components/BackgroundOverlay';
-import { useEffect } from 'react';
 
 export type RootStackParamList = {
 	Home: undefined;
 	Game: { currentNumber: number };
-	GameOver: undefined;
+	GameOver: { currentNumber: number; rounds: number };
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 SplashScreen.preventAutoHideAsync()
-	.then((result) => console.log(`SplashScreen.preventAutoHideAsync() succeeded: ${result}`))
+	.then((result: boolean) => console.log(`SplashScreen.preventAutoHideAsync() succeeded: ${result}`))
 	.catch(console.warn); // it's good to explicitly catch and inspect any error
 
 export default function App() {
@@ -64,7 +63,11 @@ export default function App() {
 						/>
 						<RootStack.Screen
 							name="GameOver"
-							options={{ title: 'Game Over' }}
+							options={{
+								title: 'Game Over',
+								headerTitleStyle: { fontSize: 24, color: 'white' },
+								headerTitleAlign: 'center',
+							}}
 							component={GameOverScreen}
 						/>
 					</RootStack.Navigator>

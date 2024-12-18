@@ -30,16 +30,15 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Game'>;
 
 export default function GameScreen({ route, navigation }: Props) {
 	const { currentNumber } = route.params;
+	const [rounds, setRounds] = useState(0);
 
 	const initialGuess = generateRandomBetween(1, 100, currentNumber);
 	const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
 	useEffect(() => {
-		if (currentGuess === currentNumber) {
-			Alert.alert('Yay', `You did it you son of a gun! The number was ${currentNumber}.`, [{ text: 'Yuppi!', style: 'default' }]);
-			navigation.replace('GameOver');
-			return;
-		}
+		if (currentGuess !== currentNumber) return;
+
+		navigation.replace('GameOver', { currentNumber, rounds });
 	}, [currentGuess, currentNumber]);
 
 	function nextGuessHandler(operant: '+' | '-'): void {
@@ -60,6 +59,7 @@ export default function GameScreen({ route, navigation }: Props) {
 		// Generate and set the new random number
 		const newRandomNumber = generateRandomBetween(min, max, currentGuess);
 		setCurrentGuess(newRandomNumber);
+		setRounds((prev) => prev + 1);
 	}
 
 	return (
@@ -71,7 +71,7 @@ export default function GameScreen({ route, navigation }: Props) {
 				<View style={{ flexDirection: 'row' }}>
 					<BaseButton
 						style={{ flex: 1 }}
-						onPress={() => nextGuessHandler('+')}
+						onPress={() => nextGuessHandler('-')}
 					>
 						<Ionicons
 							name="remove"
@@ -80,7 +80,7 @@ export default function GameScreen({ route, navigation }: Props) {
 					</BaseButton>
 					<BaseButton
 						style={{ flex: 1 }}
-						onPress={() => nextGuessHandler('-')}
+						onPress={() => nextGuessHandler('+')}
 					>
 						<Ionicons
 							name="add"
