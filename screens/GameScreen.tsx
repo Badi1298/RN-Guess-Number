@@ -1,6 +1,8 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { View, Text, StyleSheet, Alert, useWindowDimensions } from 'react-native';
 
 import { RootStackParamList } from '../App';
 
@@ -35,6 +37,8 @@ export default function GameScreen({ route, navigation }: Props) {
 	const initialGuess = generateRandomBetween(1, 100, currentNumber);
 	const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
+	const { width, height } = useWindowDimensions();
+
 	useEffect(() => {
 		if (currentGuess !== currentNumber) return;
 
@@ -67,9 +71,8 @@ export default function GameScreen({ route, navigation }: Props) {
 		setRounds((prev) => prev + 1);
 	}
 
-	return (
-		<View style={styles.screen}>
-			<Title>Oppeonent's Guess</Title>
+	let content = (
+		<>
 			<NumberContainer>{currentGuess}</NumberContainer>
 			<Card>
 				<Text style={styles.instructionText}>Higher or lower?</Text>
@@ -94,7 +97,36 @@ export default function GameScreen({ route, navigation }: Props) {
 					</BaseButton>
 				</View>
 			</Card>
-			<View></View>
+		</>
+	);
+
+	if (width > 500) {
+		content = (
+			<View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+				<Text style={styles.instructionText}>Higher or lower?</Text>
+				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+					<BaseButton onPress={() => nextGuessHandler('-')}>
+						<Ionicons
+							name="remove"
+							size={16}
+						/>
+					</BaseButton>
+					<NumberContainer>{currentGuess}</NumberContainer>
+					<BaseButton onPress={() => nextGuessHandler('+')}>
+						<Ionicons
+							name="add"
+							size={16}
+						/>
+					</BaseButton>
+				</View>
+			</View>
+		);
+	}
+
+	return (
+		<View style={styles.screen}>
+			<Title>Oppeonent's Guess</Title>
+			{content}
 		</View>
 	);
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useHeaderHeight } from '@react-navigation/elements';
-import { StyleSheet, TextInput, View, Alert, Text, useWindowDimensions } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StyleSheet, TextInput, View, Alert, Text, KeyboardAvoidingView, ScrollView } from 'react-native';
 
 import Colors from '../constants/colors';
 
@@ -39,32 +39,39 @@ export default function StartGameScreen({ navigation }: Props) {
 	const marginTop = headerHeight + 16;
 
 	return (
-		<Card style={{ marginTop }}>
-			<Text style={styles.instructionText}>Enter a number</Text>
-			<TextInput
-				value={number}
-				maxLength={2}
-				autoCorrect={false}
-				autoCapitalize="none"
-				keyboardType="number-pad"
-				style={styles.numberInput}
-				onChangeText={numberInputHandler}
-			/>
-			<View style={styles.buttonsContainer}>
-				<BaseButton
-					style={{ flex: 1 }}
-					onPress={resetInputHandler}
-				>
-					Reset
-				</BaseButton>
-				<BaseButton
-					style={{ flex: 1 }}
-					onPress={confirmHandler}
-				>
-					Confirm
-				</BaseButton>
-			</View>
-		</Card>
+		<ScrollView style={{ flex: 1 }}>
+			<KeyboardAvoidingView
+				behavior="position"
+				style={{ flex: 1 }}
+			>
+				<Card style={{ marginTop }}>
+					<Text style={styles.instructionText}>Enter a number</Text>
+					<TextInput
+						value={number}
+						maxLength={2}
+						autoCorrect={false}
+						autoCapitalize="none"
+						keyboardType="number-pad"
+						style={styles.numberInput}
+						onChangeText={numberInputHandler}
+					/>
+					<View style={styles.buttonsContainer}>
+						<BaseButton
+							style={{ flex: 1 }}
+							onPress={resetInputHandler}
+						>
+							Reset
+						</BaseButton>
+						<BaseButton
+							style={{ flex: 1 }}
+							onPress={confirmHandler}
+						>
+							Confirm
+						</BaseButton>
+					</View>
+				</Card>
+			</KeyboardAvoidingView>
+		</ScrollView>
 	);
 }
 
