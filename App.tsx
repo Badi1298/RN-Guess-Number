@@ -1,3 +1,4 @@
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -40,44 +41,46 @@ export default function App() {
 	}
 
 	return (
-		<BackgroundOverlay>
-			<SafeAreaView style={{ flex: 1 }}>
-				<NavigationContainer>
-					<RootStack.Navigator
-						initialRouteName="Home"
-						screenOptions={{
-							animation: 'slide_from_right',
-							contentStyle: { backgroundColor: 'transparent' },
-							headerTransparent: true,
-						}}
-					>
-						<RootStack.Screen
-							name="Home"
-							component={StartGameScreen}
-							options={{
-								title: 'Guess My Number',
-								headerTitleStyle: { fontSize: 24, color: 'white' },
-								headerTitleAlign: 'center',
+		<>
+			<BackgroundOverlay>
+				<SafeAreaView style={{ flex: 1 }}>
+					<NavigationContainer>
+						<RootStack.Navigator
+							initialRouteName="Home"
+							screenOptions={{
+								animation: 'slide_from_right',
+								contentStyle: { backgroundColor: 'transparent' },
+								headerTransparent: true,
 							}}
-						/>
-						<RootStack.Screen
-							name="Game"
-							component={GameScreen}
-							options={{ headerShown: false }}
-						/>
-						<RootStack.Screen
-							name="GameOver"
-							options={{
-								title: 'Game Over',
-								headerTitleStyle: { fontSize: 24, color: 'white' },
-								headerTitleAlign: 'center',
-							}}
-							component={GameOverScreen}
-						/>
-					</RootStack.Navigator>
-				</NavigationContainer>
-			</SafeAreaView>
-			<StatusBar style="auto" />
-		</BackgroundOverlay>
+						>
+							<RootStack.Screen
+								name="Home"
+								component={StartGameScreen}
+								options={{
+									title: 'Guess My Number',
+									headerTitleStyle: { fontSize: 24, color: 'white' },
+									headerTitleAlign: 'center',
+								}}
+							/>
+							<RootStack.Screen
+								name="Game"
+								component={GameScreen}
+								options={{ headerShown: false }}
+							/>
+							<RootStack.Screen
+								name="GameOver"
+								options={{
+									title: 'Game Over',
+									headerTitleStyle: { fontSize: 24, color: 'white' },
+									headerTitleAlign: 'center',
+								}}
+								component={GameOverScreen}
+							/>
+						</RootStack.Navigator>
+					</NavigationContainer>
+				</SafeAreaView>
+			</BackgroundOverlay>
+			<StatusBar style="light" />
+		</>
 	);
 }

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Text, StyleSheet, Platform } from 'react-native';
+import { Text, StyleSheet } from 'react-native';
 
 type Props = {
 	children: ReactNode;
