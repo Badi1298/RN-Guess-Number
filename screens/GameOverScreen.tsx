@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 
 import { CommonActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -36,11 +36,13 @@ export default function GameOverScreen({ route, navigation }: Props) {
 	);
 }
 
+const deviceWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
 	inputContainer: {
-		height: 300,
-		width: 300,
-		borderRadius: 150,
+		height: deviceWidth * 0.79,
+		width: deviceWidth * 0.79,
+		borderRadius: (deviceWidth * 0.79) / 2,
 		borderWidth: 3,
 		borderColor: Colors.primary800,
 		overflow: 'hidden',
