@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { StyleSheet, TextInput, View, Alert, Text } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useHeaderHeight } from '@react-navigation/elements';
+import { StyleSheet, TextInput, View, Alert, Text, useWindowDimensions } from 'react-native';
 
 import Colors from '../constants/colors';
 
@@ -13,6 +14,8 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function StartGameScreen({ navigation }: Props) {
 	const [number, setNumber] = useState('');
+
+	const headerHeight = useHeaderHeight();
 
 	const numberInputHandler = (text: string): void => {
 		setNumber(text);
@@ -33,8 +36,10 @@ export default function StartGameScreen({ navigation }: Props) {
 		navigation.navigate('Game', { currentNumber: parseInt(number) });
 	};
 
+	const marginTop = headerHeight + 16;
+
 	return (
-		<Card style={{ marginTop: 70 }}>
+		<Card style={{ marginTop }}>
 			<Text style={styles.instructionText}>Enter a number</Text>
 			<TextInput
 				value={number}
